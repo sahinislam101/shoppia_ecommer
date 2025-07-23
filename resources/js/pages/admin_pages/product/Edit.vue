@@ -6,6 +6,7 @@ import { Undo2 } from 'lucide-vue-next';
 
 
 
+
 const props = defineProps({
   product: Object,
   categories: Array,
@@ -25,9 +26,9 @@ const form = useForm({
   selling_price: props.product.selling_price,
   stock: props.product.stock,
   image: props.product.image,
-  trending: props.product.trending,
-  is_recent: props.product.is_recent,
-  is_best_deal: props.product.is_best_deal,
+  explore: props.product.explore,
+  flash_sales: props.product.flash_sales,
+  best_sell: props.product.best_sell,
   status: props.product.status,
 });
 
@@ -100,13 +101,13 @@ const form = useForm({
         <!-- Checkboxes -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <label class="flex items-center gap-2">
-            <input type="checkbox" v-model="form.trending" /> Trending
+            <input type="checkbox" v-model="form.explore" /> Explore
           </label>
           <label class="flex items-center gap-2">
-            <input type="checkbox" v-model="form.is_recent" /> Recent
+            <input type="checkbox" v-model="form.flash_sales" /> Flash Sales
           </label>
           <label class="flex items-center gap-2">
-            <input type="checkbox" v-model="form.is_best_deal" /> Best Deal
+            <input type="checkbox" v-model="form.best_sell" /> Best Sell
           </label>
           <label class="flex items-center gap-2">
             <input type="checkbox" v-model="form.status" /> Active

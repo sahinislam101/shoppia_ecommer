@@ -64,6 +64,11 @@ function handlePaginate(page: number) {
         }
     })
 }
+function confirmDelete(slug:string){
+    if (confirm('Are you sure you want to deleted your slider ?')){
+        router.delete(`/slider/$(slug)`)
+    }
+}
 </script>
 
 <template>
@@ -133,7 +138,7 @@ function handlePaginate(page: number) {
                         <td class="px-6 py-4 space-x-2">
                             <Link :href="`/sliders/${slider.slug}/edit`"
                                 class="font-medium text-blue-600 dark:text-blue-400 hover:underline">Edit</Link>
-                            <Link :href="`/sliders/${slider.slug}`" method="delete" as="button"
+                            <Link @click="confirmDelete('Are You Sure')" :href="`/sliders/${slider.slug}`" method="delete" as="button"
                                 class="font-medium text-red-600 dark:text-red-400 hover:underline">Delete</Link>
                         </td>
                     </tr>

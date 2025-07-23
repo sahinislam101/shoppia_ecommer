@@ -62,6 +62,11 @@ function handlePaginate(page: number) {
     onFinish: () => isLoading.value = false,
   });
 }
+function confirmDelete(slug:string){
+  if (confirm('Are you sure you want to deleted your sub-category ?')){
+    router.delete(`/sub/$(slug)`)
+  }
+}
 </script>
 
 <template>
@@ -116,7 +121,7 @@ function handlePaginate(page: number) {
                         class="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-md">
                     <PenLine class="w-4 h-4" /> <span class="hidden sm:inline">Edit</span>
                   </Link>
-                  <Link :href="`/subs/${sub.slug}`" method="delete" as="button"
+                  <Link @click="confirmDelete('Are You Sure ?')" :href="`/subs/${sub.slug}`" method="delete" as="button"
                         class="inline-flex items-center gap-1 px-2 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded-md">
                     <Trash2 class="w-4 h-4" /> <span class="hidden sm:inline">Delete</span>
                   </Link>

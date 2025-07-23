@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { Head, Link, router } from '@inertiajs/vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
-import { type BreadcrumbItem } from '@/types'
+import { ref, watch } from 'vue';
+import { Head, Link, router } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { type BreadcrumbItem } from '@/types';
+import { Trash2, PenLine } from 'lucide-vue-next';
 
 const props = defineProps<{
     categories: {
@@ -63,6 +64,11 @@ function handlePaginate(page: number) {
             isLoading.value = false
         }
     })
+}
+function confirmDelete(slug: string){
+    if  (confirm('Are you sure you want to deleted this  category ?')){
+        router.delete(`/categories/$(slug)`)
+    }
 }
 </script>
 
@@ -133,7 +139,7 @@ function handlePaginate(page: number) {
                         <td class="px-6 py-4 space-x-2">
                             <Link :href="`/categories/${category.slug}/edit`"
                                 class="font-medium text-blue-600 dark:text-blue-400 hover:underline">Edit</Link>
-                            <Link :href="`/categories/${category.slug}`" method="delete" as="button"
+                            <Link @click="confirmDelete('Are You Sure')" :href="`/categories/${category.slug}`" method="delete" as="button"
                                 class="font-medium text-red-600 dark:text-red-400 hover:underline">Delete</Link>
                         </td>
                     </tr>

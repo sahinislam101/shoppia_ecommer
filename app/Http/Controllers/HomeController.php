@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->get();
 
         $sliders = Slider::where('status', 1)->latest()->get();
-        $flash_sales = Product::where('status', 1)->where('flash_sales', 1)->get();
+        $flash_sales = Product::where('status', 1)->where('flash_sales', 1)->get(); //Trending
         $best_sell = Product::where('status', 1)->where('best_sell', 1)->get();
         $explore = Product::where('status', 1)->where('explore', 1)->take(8)->get();
 

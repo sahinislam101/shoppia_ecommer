@@ -13,6 +13,7 @@ interface Product {
   image: string;
   status: boolean;
   selling_price: string;
+  original_price: string;
 }
 
 const props = defineProps<{
@@ -55,6 +56,12 @@ const handlePaginate = (page: number) => {
 const breadcrumbs: BreadcrumbItem[] = [
   { title: 'Products', href: '/products' },
 ];
+
+function confirmDelete(slug: string){
+  if (confirm('Are you sure you want to deleted this product ?')) {
+    router.delete(`/product/$(slug)`);
+  }
+}
 </script>
 <template>
   <Head title="Products" />
@@ -104,7 +111,7 @@ const breadcrumbs: BreadcrumbItem[] = [
               </td>
               <td class="px-4 py-3 font-medium text-gray-900">{{ product.name }}</td>
               <td class="px-4 py-3 text-gray-600 truncate max-w-xs">{{ product.description }}</td>
-              <td class="px-4 py-3 text-gray-800 font-semibold">৳ {{ product.selling_price }}</td>
+              <td class="px-4 py-3 text-gray-800 font-semibold">৳ {{ product.original_price }}</td>
               <td class="px-4 py-3">
                 <span :class="product.status ? 'text-green-600' : 'text-red-600'" class="font-semibold">
                   {{ product.status ? 'Active' : 'Inactive' }}
@@ -117,9 +124,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                     <PenLine class="w-4 h-4" />
                     <span class="hidden sm:inline">Edit</span>
                   </Link>
-                  <Link :href="`/products/${product.slug}`" method="delete" as="button"
+                  <Link @click="confirmDelete('Are You Sure')" :href="`/products/${product.slug}`" method="delete" as="button"
                     class="flex items-center gap-1 px-2 py-1 text-red-700 bg-red-100 hover:bg-red-200 rounded-md transition">
-                    <Trash2 class="w-4 h-4" />
+                    <Trash2  class="w-4 h-4" />
                     <span class="hidden sm:inline">Delete</span>
                   </Link>
                 </div>
